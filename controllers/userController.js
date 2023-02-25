@@ -90,14 +90,12 @@ const getUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const id = req.params.id;
-    console.log(id);
     //check if the requested user and account user is same
-    if (id == req.user._id) {
+    if (id == req.user._id.toString()) {
       const { name, email, password, new_password } = req.body;
       const user = await User.findById(id).lean();
 
       if (password && new_password) {
-        console.log("pswd");
         const comparePassword = await bcrypt.compare(password, user.password);
 
         if (comparePassword) {
@@ -151,7 +149,7 @@ const deleteUser = async (req, res, next) => {
     const id = req.params.id;
 
     //check if the requested user and account user is same
-    if (id == req.user._id) {
+    if (id.toString() == req.user._id.toString()) {
       await User.findByIdAndDelete(id);
 
       res.status(200).json("User deleted successfully");

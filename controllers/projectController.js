@@ -62,7 +62,7 @@ const updateProject = async (req, res, next) => {
     const project = await Project.findById(id).lean();
 
     //chech if requested user id and account user id is same
-    if (project.user_id == req.user._id) {
+    if (project.user_id.toString() == req.user._id.toString()) {
       const newProject = await Project.findByIdAndUpdate(
         id,
         { name, description, due_date },
@@ -83,9 +83,8 @@ const deleteProject = async (req, res, next) => {
   try {
     const id = req.params.id;
     const project = await Project.findById(id).lean();
-
     //chech if requested user id and account user id is same
-    if (project.user_id == req.user._id) {
+    if (project.user_id.toString() == req.user._id.toString()) {
       await Project.findByIdAndDelete(id);
 
       res.status(200).json("Project deleted successfully");

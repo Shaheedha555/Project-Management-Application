@@ -6,10 +6,9 @@ const createTask = async (req, res, next) => {
   try {
     const { name, description, due_date, project_id, user_id } = req.body;
     const project = await Project.findById(project_id).lean();
-    const userId = project.user_id;
 
     //checks project owner and current user are same
-    if (userId == req.user._id) {
+    if (project.user_id.toString() == req.user._id.toString()) {
       const task = await Task.create({
         name,
         description,
@@ -79,7 +78,7 @@ const updateTask = async (req, res, next) => {
     const task = await Task.findById(id).lean();
 
     //chech if requested user id and account user id is same
-    if (task.user_id == req.user._id) {
+    if (task.user_id.toString() == req.user._id.toString()) {
       const { name, description, due_date } = req.body;
 
       const newTask = await Task.findByIdAndUpdate(id, {
@@ -102,7 +101,7 @@ const deleteTask = async (req, res, next) => {
     const task = await Task.findById(id).lean();
 
     //chech if requested user id and account user id is same
-    if (task.user_id == req.user._id) {
+    if (task.user_id.toString() == req.user._id.toString()) {
       await Task.findByIdAndDelete(id);
 
       res.status(200).json("Task deleted successfully");
