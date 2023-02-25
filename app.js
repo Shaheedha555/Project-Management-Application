@@ -16,6 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 
 database(process.env.MONGO_URI);
 
+app.get("/", (req, res) => {
+  res.send(
+    `<div style="text-align:center; margin:2rem;"><h2>Project Management Application API is ready for getting requests.</h2><p>Refer
+     <a href="https://github.com/Shaheedha555/Project-Management-Application/blob/master/API-Documentation.md">documentation</a>
+      for making requests. Thank you!</p> </div>`
+  );
+});
 app.use("/users", userRouter);
 app.use("/projects", projectRouter);
 app.use("/tasks", taskRouter);

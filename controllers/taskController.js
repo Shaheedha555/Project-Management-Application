@@ -1,19 +1,25 @@
 const Task = require("../models/Task");
+const Project = require("../models/Project");
 
 //create new task for a project with a user
 const createTask = async (req, res, next) => {
   try {
     const { name, description, due_date, project_id, user_id } = req.body;
+    const project = await Project.findById(project_id).lean();
+    const userId = project.user_id;
 
-    const task = await Task.create({
-      name,
-      description,
-      due_date,
-      user_id,
-      project_id,
-    });
+    //checks project owner and current user are same
+    if (userId == req.user._id) {
+      const task = await Task.create({
+        name,
+        description,
+        due_date,
+        user_id,
+        project_id,
+      });
 
-    res.status(200).json(task);
+      res.status(200).json(task);
+    } else res.status(403).json("Permission denied");
   } catch (error) {
     next(error);
   }

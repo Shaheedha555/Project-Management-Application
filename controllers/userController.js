@@ -90,13 +90,14 @@ const getUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const id = req.params.id;
-
+    console.log(id);
     //check if the requested user and account user is same
     if (id == req.user._id) {
       const { name, email, password, new_password } = req.body;
       const user = await User.findById(id).lean();
 
       if (password && new_password) {
+        console.log("pswd");
         const comparePassword = await bcrypt.compare(password, user.password);
 
         if (comparePassword) {
@@ -114,7 +115,7 @@ const updateUser = async (req, res, next) => {
           ).select("-password");
 
           res.status(200).json(newUserData);
-        }
+        } else res.status(401).json("Wrong password");
       }
 
       //check if new email is already used
@@ -136,7 +137,9 @@ const updateUser = async (req, res, next) => {
         .lean();
 
       res.status(200).json(newUserData);
-    } else res.status(403).json("Permission denied");
+    } else {
+      res.status(403).json("Permission denied");
+    }
   } catch (error) {
     next(error);
   }

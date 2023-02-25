@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 
-// Sanitize and validate user input middleware function
+// Sanitize and validate user input - middleware functions
 exports.validateUserData = [
   body("name")
     .not()
@@ -30,6 +30,7 @@ exports.validateUserData = [
     next();
   },
 ];
+
 exports.validateProjectData = [
   body("name")
     .not()
@@ -54,6 +55,7 @@ exports.validateProjectData = [
     next();
   },
 ];
+
 exports.validateTaskData = [
   body("name")
     .not()
@@ -95,6 +97,7 @@ exports.validateNewUserData = [
     next();
   },
 ];
+
 exports.validateNewProjectData = [
   body("name").optional().trim().escape(),
   body("description").optional().trim().escape(),
@@ -109,6 +112,7 @@ exports.validateNewProjectData = [
     next();
   },
 ];
+
 exports.validateNewTaskData = [
   body("name").optional().trim().escape(),
   body("description").optional().trim().escape(),
