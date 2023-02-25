@@ -29,8 +29,7 @@ This API controls the following requests:
 
 All endpoints except `/users` and `/users/login` require authentication using JWT. To authenticate, include an Authorization header with the value `Bearer {token}` where `{token}` is the JWT obtained from `/users/login`.
 
-### Users
-___
+## Users
 
 ### Register
 
@@ -41,7 +40,7 @@ Body:
 
 | Name     | Type   | Required | Description      |
 |----------|--------|----------|------------------|
-| name     | string | No       | User's name      |
+| name     | string | Yes       | User's name      |
 | email    | string | Yes      | User's email     |
 | password | string | Yes      | User's password  |
 
@@ -148,7 +147,6 @@ Response:
 
 
 ## Projects
-___
 
 ### Create new project
 
@@ -246,7 +244,7 @@ Response:
 | message   | string | Success message             |
 
 ## Tasks
-___
+
 
 ### Create task in a project for a user
 
