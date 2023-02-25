@@ -62,7 +62,7 @@ API Documentation contains the details of all endpoints, parameters, and respons
 
 ### Deployment:
 The API is deployed on Vercel using github repo.
-Link to the deployed API : [https://project-management-application-42oj.vercel.app/](https://project-management-application-42oj.vercel.app/)
+Link to the deployed API : [https://project-management-application-42oj.vercel.app/](https://project-management-application-k76g.vercel.app/)
 
 
 
